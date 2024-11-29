@@ -31,13 +31,13 @@ switch ($requestMethod) {
 
     case 'POST':
         // Add a new user
-        if (isset($data['user_id'], $data['user_name'], $data['user_email'], $data['user_fingerprint'])) {
+        if (isset($data['user_id'], $data['user_name'], $data['user_email'], $data['user_password'])) {
             $user_Id = $data['user_id'];
             $user_Name = $data['user_name'];
             $user_Email = $data['user_email'];
-            $user_Fingerprint = $data['user_fingerprint'];
+            $user_Fingerprint = $data['user_password'];
 
-            $sql = "INSERT INTO users (user_id, user_name, user_email, user_fingerprint) VALUES ('$user_Id', '$user_Name', '$user_Email', '$user_Fingerprint')";
+            $sql = "INSERT INTO users (user_id, user_name, user_email, user_password) VALUES ('$user_Id', '$user_Name', '$user_Email', '$user_Fingerprint')";
             if ($conn->query($sql) === TRUE) {
                 echo json_encode(["message" => "User added successfully!"]);
             } else {
@@ -61,8 +61,8 @@ switch ($requestMethod) {
             if (isset($data['user_email'])) {
                 $fields[] = "user_email = '{$data['user_email']}'";
             }
-            if (isset($data['user_fingerprint'])) {
-                $fields[] = "user_fingerprint = '{$data['user_fingerprint']}'";
+            if (isset($data['user_password'])) {
+                $fields[] = "user_password = '{$data['user_password']}'";
             }
 
             if (!empty($fields)) {
