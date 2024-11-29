@@ -35,9 +35,9 @@ switch ($requestMethod) {
             $user_Id = $data['user_id'];
             $user_Name = $data['user_name'];
             $user_Email = $data['user_email'];
-            $user_Fingerprint = $data['user_password'];
+            $user_password = $data['user_password'];
 
-            $sql = "INSERT INTO users (user_id, user_name, user_email, user_password) VALUES ('$user_Id', '$user_Name', '$user_Email', '$user_Fingerprint')";
+            $sql = "INSERT INTO users (user_id, user_name, user_email, user_password) VALUES ('$user_Id', '$user_Name', '$user_Email', '$user_password')";
             if ($conn->query($sql) === TRUE) {
                 echo json_encode(["message" => "User added successfully!"]);
             } else {
