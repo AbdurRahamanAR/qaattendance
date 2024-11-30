@@ -21,10 +21,12 @@ $data = json_decode(file_get_contents("php://input"), true);
 switch ($requestMethod) {
     case 'POST':
         // Register a new user
-        if (isset($data['user_id'], $data['user_name'], $data['user_password'])) {
+        if (isset($data['user_id'], $data['user_name'], $data['user_email'],$data['user_password'])) {
             $user_Id = $conn->real_escape_string($data['user_id']);
             $user_Name = $conn->real_escape_string($data['user_name']);
+            $user_email=$conn->real_escape_string($data['user_email']);
             $user_password = $conn->real_escape_string($data['user_password']);
+           
             
             // Check if the user_id already exists in the database
             $checkUserSql = "SELECT * FROM users WHERE user_id = '$user_Id'";
@@ -38,7 +40,7 @@ switch ($requestMethod) {
                 ]);
             } else {
                 // Insert the new user into the database
-                $sql = "INSERT INTO users (user_id, user_name, user_password) VALUES ('$user_Id', '$user_Name', '$user_password')";
+                $sql = "INSERT INTO users (user_id, user_name, user_password,user_email) VALUES ('$user_Id', '$user_Name', '$user_password','$user_email')";
                 
                 if ($conn->query($sql) === TRUE) {
                     // If registration is successful, return user details
@@ -59,7 +61,7 @@ switch ($requestMethod) {
             // Missing input data
             echo json_encode([
                 "error" => true,
-                "message" => "Missing user_id, user_name, or user_password"
+                "message" => "Missing user_id, user_name, user_email or user_password"
             ]);
         }
         break;
