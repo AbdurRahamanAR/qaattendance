@@ -3,7 +3,7 @@
 $host = "localhost";
 $username = "root";
 $password = "";
-$db_name = "api_demo";
+$db_name = "attendance_system";
 
 $conn = new mysqli($host, $username, $password, $db_name);
 
